@@ -9,7 +9,7 @@ public class PlayerTouchController : MonoBehaviour
 
 
     bool isActive = true;
-    float her, ver;
+    float horizontalInput, verticalInput;
 
     CharacterController characterController;
     private void Awake()
@@ -19,14 +19,20 @@ public class PlayerTouchController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(joystick.Horizontal);
         if (joystick.Horizontal >= .2)
-            her = playerSpeed;
+            horizontalInput = playerSpeed;
         else if (joystick.Horizontal <= -.2)
-            her = -playerSpeed;
+            horizontalInput = -playerSpeed;
         else
-            her = 0f;
+            horizontalInput = 0f;
 
-        characterController.Move(new Vector3(her,0f,0f) * Time.deltaTime );
+        if (joystick.Vertical >= .2)
+            verticalInput = playerSpeed;
+        else if (joystick.Vertical <= -.2)
+            verticalInput = -playerSpeed;
+        else
+            verticalInput = 0f;
+
+        characterController.Move(new Vector3(horizontalInput,0f,verticalInput) * Time.deltaTime );
     }
 }
