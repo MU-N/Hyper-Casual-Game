@@ -10,12 +10,17 @@ public class UiMnager : MonoBehaviour
     void Start()
     {
 
+        CallMenus(0);
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            CallMenus(2);
+        }
     }
     public void CallMenus(int index)
     {
@@ -39,12 +44,39 @@ public class UiMnager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void CallCancelButton()
+    public void CallCancelButton(int index )
     {
-        for (int i = 0; i < menus.Length; i++)
-        {
-            menus[i].SetActive(false);
-        }
+        CallMenus(index);
+
+    }
+
+    public void PlayButton()
+    {
+        //scenemanger
+        CallCancelButtonWithTimeScale();
+    }
+
+    public void NextButton()
+    {
+        //scenemanger.load biuld scen index +1
+        CallCancelButtonWithTimeScale();
+    }
+    public void RestartButton()
+    {
+        //scenemanger.loadactive scene
+        CallCancelButtonWithTimeScale();
+    }
+
+    public void BackToAnotherMenuButton(int index)
+    {
+        //scenemanger
+        CallMenus(index);
+    }
+
+    public void ExitButton()
+    {
+        //scenemanger
+        Application.Quit();
     }
 
 
