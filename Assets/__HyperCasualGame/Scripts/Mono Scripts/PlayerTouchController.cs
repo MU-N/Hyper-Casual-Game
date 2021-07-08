@@ -9,9 +9,11 @@ public class PlayerTouchController : MonoBehaviour
 
 
 
-    float horizontalInput, verticalInput;
+    private float horizontalInput, verticalInput;
 
-    Rigidbody rb;
+    private bool isPlayerStoped = false;
+
+    private Rigidbody rb;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -21,20 +23,39 @@ public class PlayerTouchController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (joystick.Horizontal >= .2)
-            horizontalInput = playerSpeed;
-        else if (joystick.Horizontal <= -.2)
-            horizontalInput = -playerSpeed;
-        else
-            horizontalInput = 0f;
+        if (!isPlayerStoped)
+        {
+            if (joystick.Horizontal >= .2)
+                horizontalInput = playerSpeed;
+            else if (joystick.Horizontal <= -.2)
+                horizontalInput = -playerSpeed;
+            else
+                horizontalInput = 0f;
 
-        if (joystick.Vertical >= .2)
-            verticalInput = playerSpeed;
-        else if (joystick.Vertical <= -.2)
-            verticalInput = -playerSpeed;
-        else
-            verticalInput = 0f;
+            if (joystick.Vertical >= .2)
+                verticalInput = playerSpeed;
+            else if (joystick.Vertical <= -.2)
+                verticalInput = -playerSpeed;
+            else
+                verticalInput = 0f;
 
-        rb.velocity = new Vector3(horizontalInput, rb.velocity.y, verticalInput);
+            rb.velocity = new Vector3(horizontalInput, rb.velocity.y, verticalInput);
+        }
+        else
+        {
+            //if
+            //win dance
+            //esle
+            //cry
+        }
+    }
+
+    public void StopPlayer()
+    {
+        isPlayerStoped = true;
+    }
+    public void RunPlayer()
+    {
+        isPlayerStoped = false;
     }
 }

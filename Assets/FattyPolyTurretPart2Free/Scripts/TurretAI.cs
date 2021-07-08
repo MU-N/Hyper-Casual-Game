@@ -104,7 +104,7 @@ public class TurretAI : MonoBehaviour {
         }
     }
 
-    private void FollowTarget() //todo : smooth rotate
+    private void FollowTarget() 
     {
         Vector3 targetDir = currentTarget.transform.position - turreyHead.position;
         targetDir.y = 0;
