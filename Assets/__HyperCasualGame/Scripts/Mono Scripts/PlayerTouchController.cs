@@ -8,14 +8,16 @@ public class PlayerTouchController : MonoBehaviour
     [SerializeField] float playerSpeed;
 
 
-    bool isActive = true;
+
     float horizontalInput, verticalInput;
 
-    CharacterController characterController;
+    Rigidbody rb;
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +35,6 @@ public class PlayerTouchController : MonoBehaviour
         else
             verticalInput = 0f;
 
-        characterController.Move(new Vector3(horizontalInput,0f,verticalInput) * Time.deltaTime );
+        rb.velocity = new Vector3(horizontalInput, rb.velocity.y, verticalInput);
     }
 }
