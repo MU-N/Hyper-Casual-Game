@@ -14,9 +14,11 @@ public class PlayerTouchController : MonoBehaviour
     private bool isPlayerStoped = false;
 
     private Rigidbody rb;
+    private Animator animator;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -40,6 +42,9 @@ public class PlayerTouchController : MonoBehaviour
                 verticalInput = 0f;
 
             rb.velocity = new Vector3(horizontalInput, rb.velocity.y, verticalInput);
+
+            animator.SetBool("isWalking", horizontalInput != 0 || verticalInput != 0);
+
         }
         else
         {
