@@ -18,7 +18,7 @@ public class PlayerTouchController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
     }
 
@@ -27,23 +27,23 @@ public class PlayerTouchController : MonoBehaviour
     {
         if (!isPlayerStoped)
         {
-            if (joystick.Horizontal >= .2)
+            if (joystick.Horizontal >= 0.2f)
                 horizontalInput = playerSpeed;
-            else if (joystick.Horizontal <= -.2)
+            else if (joystick.Horizontal <= -0.2f)
                 horizontalInput = -playerSpeed;
             else
                 horizontalInput = 0f;
 
-            if (joystick.Vertical >= .2)
+            if (joystick.Vertical >= 0.2f)
                 verticalInput = playerSpeed;
-            else if (joystick.Vertical <= -.2)
+            else if (joystick.Vertical <= -0.2f)
                 verticalInput = -playerSpeed;
             else
                 verticalInput = 0f;
 
             rb.velocity = new Vector3(horizontalInput, rb.velocity.y, verticalInput);
 
-            animator.SetBool("isWalking", horizontalInput != 0 || verticalInput != 0);
+            animator.SetBool("isWalking", horizontalInput != 0f || verticalInput != 0f);
 
         }
         else
@@ -53,6 +53,7 @@ public class PlayerTouchController : MonoBehaviour
             //esle
             //cry
         }
+        
     }
 
     public void StopPlayer()
