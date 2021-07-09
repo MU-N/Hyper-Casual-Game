@@ -6,6 +6,7 @@ public class PlayerTouchController : MonoBehaviour
 {
     [SerializeField] Joystick joystick;
     [SerializeField] float playerSpeed;
+    [SerializeField] float rotaionSpeed;
 
 
 
@@ -41,10 +42,12 @@ public class PlayerTouchController : MonoBehaviour
             else
                 verticalInput = 0f;
 
-            rb.velocity = new Vector3(horizontalInput, rb.velocity.y, verticalInput);
+            rb.velocity = new Vector3(0, rb.velocity.y, verticalInput );
+            transform.Rotate(new Vector3(0, horizontalInput *rotaionSpeed*  Time.deltaTime, 0));
 
             animator.SetBool("isWalking", horizontalInput != 0f || verticalInput != 0f);
-
+            // todo : update player movement
+            // todo : adding anemy with fild of view
         }
         else
         {
