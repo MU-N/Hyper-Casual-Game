@@ -23,7 +23,6 @@ public class PlayerTouchController : MonoBehaviour
     private CharacterController characterController;
     private void Awake()
     {
-        // rb = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         cameraTransform = Camera.main.transform;
@@ -71,8 +70,6 @@ public class PlayerTouchController : MonoBehaviour
             cameraTransform.position = new Vector3(cameraTransform.position.x , cameraTransform.position.y , transform.position.z -12f);
 
             animator.SetBool("isWalking", horizontalInput != 0f || verticalInput != 0f);
-            // todo : update player movement
-            // todo : adding anemy with fild of view
         }
         else
         {
