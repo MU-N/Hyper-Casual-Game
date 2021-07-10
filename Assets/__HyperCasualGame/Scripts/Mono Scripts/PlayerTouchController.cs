@@ -6,26 +6,34 @@ public class PlayerTouchController : MonoBehaviour
 {
     [SerializeField] Joystick joystick;
     [SerializeField] float playerSpeed;
-    [SerializeField] float rotaionSpeed;
-
-
+    [SerializeField] float rotationSpeed;
 
     private float horizontalInput, verticalInput;
+    private float gravityValue = -9.81f;
 
     private bool isPlayerStoped = false;
 
-    private Rigidbody rb;
+    private Vector3 input;
+    private Vector3 direction;
+    private Vector3 playerVelocity;
+    private Quaternion cameraRotaion;
+
+    private Transform cameraTransform;
     private Animator animator;
+    private CharacterController characterController;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        // rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
-
+        cameraTransform = Camera.main.transform;
+        cameraRotaion = cameraTransform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (!isPlayerStoped)
         {
             if (joystick.Horizontal >= 0.2f)
@@ -42,8 +50,25 @@ public class PlayerTouchController : MonoBehaviour
             else
                 verticalInput = 0f;
 
-            rb.velocity = new Vector3(0, rb.velocity.y, verticalInput );
-            transform.Rotate(new Vector3(0, horizontalInput *rotaionSpeed*  Time.deltaTime, 0));
+            input = new Vector3(horizontalInput,0f, verticalInput);
+            direction = input.x * cameraTransform.right + input.z * cameraTransform.forward;
+            direction.y = 0f;
+
+
+            characterController.Move(direction * playerSpeed * Time.deltaTime);
+
+            if (direction != Vector3.zero)
+            {
+                float targetAngle = Mathf.Atan2(input.x, input.z) * Mathf.Rad2Deg + cameraTransform.forward.x;
+                Quaternion rotaion = Quaternion.Euler(0f,targetAngle,0f);
+                gameObject.transform.rotation = Quaternion.Lerp(transform.rotation , rotaion , Time.deltaTime * rotationSpeed);
+            }
+
+
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            characterController.Move(playerVelocity * Time.deltaTime);
+
+            cameraTransform.position = new Vector3(cameraTransform.position.x , cameraTransform.position.y , transform.position.z -12f);
 
             animator.SetBool("isWalking", horizontalInput != 0f || verticalInput != 0f);
             // todo : update player movement
@@ -56,7 +81,7 @@ public class PlayerTouchController : MonoBehaviour
             //esle
             //cry
         }
-        
+
     }
 
     public void StopPlayer()
