@@ -12,7 +12,7 @@ public class EnemyWithPistol : MonoBehaviour
     [SerializeField] LayerMask whatIsPlayer;
     [SerializeField] Transform tagetRayCastObject;
 
-    [SerializeField] GameEvent playerDie;
+
     int index;
 
     private bool isTouchingPlayer;
@@ -51,7 +51,6 @@ public class EnemyWithPistol : MonoBehaviour
     public void attackPlayer()
     {
         animator.SetTrigger("isShooting");
-        playerDie.Raise();
     }
 
 }

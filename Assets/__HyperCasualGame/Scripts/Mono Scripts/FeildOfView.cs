@@ -36,7 +36,7 @@ public class FeildOfView : MonoBehaviour
     }
 
 
-
+    [SerializeField] GameContrllerData GCD;
     [SerializeField] public float viewRadius;
     [Range(0, 360)]
     [SerializeField] public float viewAngle;
@@ -52,12 +52,16 @@ public class FeildOfView : MonoBehaviour
     Mesh viewMesh;
 
     [HideInInspector] public List<Transform> visableTargets = new List<Transform>();
+
+    private Animator animator;
+
     private void Start()
     {
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine("FindTragetWithDelay", 0.2f);
+        animator = GetComponentInChildren<Animator>();
 
     }
 
@@ -94,8 +98,10 @@ public class FeildOfView : MonoBehaviour
                     visableTargets.Add(target);
                     if(target.GetComponent<PlayerTouchController>()!=null)
                     {
-                    //TODO: CALL SHHOT ANIMTION ;
-                    //TODO: CALL GAME LOSE
+                        //TODO: CALL SHHOT ANIMTION ;
+                        animator.SetTrigger("isShooting");
+                        //TODO: CALL GAME LOSE
+                        GCD.isGameLose = true;
                     }
                     
                 }
