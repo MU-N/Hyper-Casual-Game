@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerTouchController : MonoBehaviour
 {
+    [SerializeField] GameContrllerData GCD;
     [SerializeField] Joystick joystick;
     [SerializeField] float playerSpeed;
     [SerializeField] float rotationSpeed;
+    
 
     private float horizontalInput, verticalInput;
     private float gravityValue = -9.81f;
@@ -27,13 +29,15 @@ public class PlayerTouchController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         cameraTransform = Camera.main.transform;
         cameraRotaion = cameraTransform.rotation;
+        GCD.isGameWin = false;
+        GCD.isGameLose = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        if (!isPlayerStoped)
+        if (!GCD.isGameLose&& !GCD.isGameWin)
         {
             if (joystick.Horizontal >= 0.2f)
                 horizontalInput = playerSpeed;
@@ -51,7 +55,7 @@ public class PlayerTouchController : MonoBehaviour
 
             input = new Vector3(horizontalInput,0f, verticalInput);
             direction = input.x * cameraTransform.right + input.z * cameraTransform.forward;
-            direction.y = 0f;
+            direction.y -= gravityValue * Time.deltaTime;
 
 
             characterController.Move(direction * playerSpeed * Time.deltaTime);
@@ -73,10 +77,14 @@ public class PlayerTouchController : MonoBehaviour
         }
         else
         {
-            //if
-            //win dance
-            //esle
-            //cry
+            if(GCD.isGameWin)
+            {
+                //animtion dance;
+            }
+            else if(GCD.isGameLose)
+            {
+                //animtion cry;
+            }
         }
 
     }
@@ -88,5 +96,11 @@ public class PlayerTouchController : MonoBehaviour
     public void RunPlayer()
     {
         isPlayerStoped = false;
+    }
+    public void Die()
+    {
+        animator.SetBool("isDead",true);
+        StopPlayer();
+
     }
 }

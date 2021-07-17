@@ -5,8 +5,9 @@ using UnityEngine.Events;
 
 public class NextLvelCheck : MonoBehaviour
 {
+    [SerializeField] GameContrllerData GCD;
     [SerializeField] UnityEvent callWinMenu;
-    [SerializeField] UnityEvent callStopPlayer;
+
     
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +15,7 @@ public class NextLvelCheck : MonoBehaviour
         {
             // event to handel call next Mneu
             callWinMenu.Invoke();
-            callStopPlayer.Invoke();
+            GCD.isGameWin = true;
         }
     }
 

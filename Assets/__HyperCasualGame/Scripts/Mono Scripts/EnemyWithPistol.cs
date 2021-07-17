@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class EnemyWithPistol : MonoBehaviour
 {
+    [SerializeField] GameContrllerData GCD;
     [SerializeField] Transform[] points;
     [SerializeField] float enemySpeed;
+    [SerializeField] float attackRange;
 
-    int index; 
+    [SerializeField] LayerMask whatIsPlayer;
+    [SerializeField] Transform tagetRayCastObject;
+
+    [SerializeField] GameEvent playerDie;
+    int index;
+
+    private bool isTouchingPlayer;
+
     private Animator animator;
-    private Rigidbody rb;
+
 
     void Start()
     {
         index = 0;
-        rb = GetComponent<Rigidbody>();
+
         animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
-        EnemyPatrol();
+        if (!GCD.isGameLose&&!GCD.isGameWin)
+            EnemyPatrol();
+
     }
 
     private void EnemyPatrol()
@@ -36,4 +47,11 @@ public class EnemyWithPistol : MonoBehaviour
             index = (index + 1) % points.Length;
         }
     }
+
+    public void attackPlayer()
+    {
+        animator.SetTrigger("isShooting");
+        playerDie.Raise();
+    }
+
 }

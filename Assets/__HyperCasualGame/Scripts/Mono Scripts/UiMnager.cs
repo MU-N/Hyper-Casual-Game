@@ -68,6 +68,7 @@ public class UiMnager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         CallCancelAllButton();
+        
     }
 
     public void CallWinMenu()
