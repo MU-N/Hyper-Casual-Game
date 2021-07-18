@@ -13,6 +13,10 @@ public class EnemyWithPistol : MonoBehaviour
     [SerializeField] Transform tagetRayCastObject;
 
 
+    [SerializeField] GameObject particlesEffect;
+    [SerializeField] Transform particlesEffectLocation;
+
+
     int index;
 
     private bool isTouchingPlayer;
@@ -51,6 +55,9 @@ public class EnemyWithPistol : MonoBehaviour
     public void attackPlayer()
     {
         animator.SetTrigger("isShooting");
+        GameObject effect =  Instantiate(particlesEffect, particlesEffectLocation.position, particlesEffectLocation.rotation);
+        Destroy(effect, 0.4f);
+
     }
 
 }

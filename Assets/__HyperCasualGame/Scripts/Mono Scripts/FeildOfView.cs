@@ -53,7 +53,7 @@ public class FeildOfView : MonoBehaviour
 
     [HideInInspector] public List<Transform> visableTargets = new List<Transform>();
 
-    private Animator animator;
+    EnemyWithPistol EWP;
 
     private void Start()
     {
@@ -61,8 +61,7 @@ public class FeildOfView : MonoBehaviour
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine("FindTragetWithDelay", 0.2f);
-        animator = GetComponentInChildren<Animator>();
-
+        EWP = GetComponent<EnemyWithPistol>();
     }
 
     private void LateUpdate()
@@ -72,7 +71,7 @@ public class FeildOfView : MonoBehaviour
 
     IEnumerator FindTragetWithDelay(float dealy)
     {
-        while (true)
+        while (!GCD.isGameLose&&!GCD.isGameWin)
         {
             yield return new WaitForSeconds(dealy);
             FindVisableTarget();
@@ -99,7 +98,7 @@ public class FeildOfView : MonoBehaviour
                     if(target.GetComponent<PlayerTouchController>()!=null)
                     {
                         //TODO: CALL SHHOT ANIMTION ;
-                        animator.SetTrigger("isShooting");
+                        EWP.attackPlayer();
                         //TODO: CALL GAME LOSE
                         GCD.isGameLose = true;
                     }
