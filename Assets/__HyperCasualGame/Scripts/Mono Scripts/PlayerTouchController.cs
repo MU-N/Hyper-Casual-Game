@@ -14,12 +14,10 @@ public class PlayerTouchController : MonoBehaviour
     private float horizontalInput, verticalInput;
     private float gravityValue = -9.81f;
 
-    private bool isPlayerStoped = false;
 
     private Vector3 input;
     private Vector3 direction;
     private Vector3 playerVelocity;
-    private Quaternion cameraRotaion;
 
     private Transform cameraTransform;
     private Animator animator;
@@ -29,7 +27,6 @@ public class PlayerTouchController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         cameraTransform = Camera.main.transform;
-        cameraRotaion = cameraTransform.rotation;
         GCD.isGameWin = false;
         GCD.isGameLose = false;
     }

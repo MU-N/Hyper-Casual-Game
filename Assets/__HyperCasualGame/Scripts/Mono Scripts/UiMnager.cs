@@ -1,19 +1,22 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UiMnager : MonoBehaviour
 {
     [SerializeField] GameObject[] menus;
-     int levelCount;
+    [SerializeField] TMP_Text scoreUI;
+    [SerializeField] GameContrllerData GCD;
+    int levelCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(SceneManager.GetActiveScene().buildIndex==0)
-        CallMenus(0);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            CallMenus(0);
         levelCount = SceneManager.sceneCountInBuildSettings;
-        
+
     }
 
     // Update is called once per frame
@@ -24,7 +27,7 @@ public class UiMnager : MonoBehaviour
         {
             CallMenus(2);
         }
-
+        scoreUI.text = GCD.Score.ToString();
 
     }
     public void CallMenus(int index)
@@ -68,7 +71,7 @@ public class UiMnager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         CallCancelAllButton();
-        
+
     }
 
     public void CallWinMenu()
@@ -91,11 +94,11 @@ public class UiMnager : MonoBehaviour
 
     public void CallplayLevel()
     {
-        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1 % levelCount) );
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1 % levelCount));
     }
-    public  void CallNextLevel()
+    public void CallNextLevel()
     {
         SceneManager.LoadScene(((SceneManager.GetActiveScene().buildIndex + 1) % levelCount) + 1);
     }
-    
+
 }

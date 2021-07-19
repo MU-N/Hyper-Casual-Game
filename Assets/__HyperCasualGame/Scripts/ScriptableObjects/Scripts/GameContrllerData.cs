@@ -7,6 +7,13 @@ public class GameContrllerData : ScriptableObject
 {
     public bool isGameWin = false;
     public bool isGameLose = false;
+    public int Score = 0;
 
 
+    public void RestData()
+    {
+        isGameWin = false;
+        isGameLose = false;
+        Score = 0;
+    }
 }
