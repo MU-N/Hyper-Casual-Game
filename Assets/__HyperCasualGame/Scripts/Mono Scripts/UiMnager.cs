@@ -16,7 +16,10 @@ public class UiMnager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 0)
             CallMenus(0);
         levelCount = SceneManager.sceneCountInBuildSettings;
-
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            GCD.RestData();
+        }
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class UiMnager : MonoBehaviour
             CallMenus(2);
         }
         scoreUI.text = GCD.Score.ToString();
-
+        
     }
     public void CallMenus(int index)
     {
@@ -94,11 +97,12 @@ public class UiMnager : MonoBehaviour
 
     public void CallplayLevel()
     {
-        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1 % levelCount));
+        SceneManager.LoadScene(1);
     }
     public void CallNextLevel()
     {
-        SceneManager.LoadScene(((SceneManager.GetActiveScene().buildIndex + 1) % levelCount) + 1);
+        
+        SceneManager.LoadScene(((SceneManager.GetActiveScene().buildIndex + 1) % levelCount) +1);
     }
 
 }

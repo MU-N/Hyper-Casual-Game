@@ -11,7 +11,7 @@ public class NextLvelCheck : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && GCD.hasTheKey)
         {
             // event to handel call next Mneu
             callWinMenu.Invoke();

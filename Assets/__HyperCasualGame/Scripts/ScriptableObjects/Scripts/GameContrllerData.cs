@@ -7,6 +7,7 @@ public class GameContrllerData : ScriptableObject
 {
     public bool isGameWin = false;
     public bool isGameLose = false;
+    public bool hasTheKey = false;
     public int Score = 0;
 
 
@@ -14,6 +15,11 @@ public class GameContrllerData : ScriptableObject
     {
         isGameWin = false;
         isGameLose = false;
+        hasTheKey = false;
         Score = 0;
+    }
+    public void RestKey()
+    {
+        hasTheKey = false;
     }
 }

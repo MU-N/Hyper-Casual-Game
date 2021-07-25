@@ -1,5 +1,5 @@
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTouchController : MonoBehaviour
@@ -51,6 +51,11 @@ public class PlayerTouchController : MonoBehaviour
             else
                 verticalInput = 0f;
 
+            if(horizontalInput!=0 && verticalInput !=0)
+            {
+                horizontalInput /= 2.0f;
+                verticalInput /= 2.0f;
+            }
             input = new Vector3(horizontalInput, 0f, verticalInput);
             direction = input.x * cameraTransform.right + input.z * cameraTransform.forward;
             direction.y -= gravityValue * Time.deltaTime;
