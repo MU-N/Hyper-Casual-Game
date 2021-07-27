@@ -15,7 +15,7 @@ public class PowerUp : MonoBehaviour
         {
             Pickup();
             GCD.Score += Random.Range(maxCoinValue, minCoinValue);
-
+            FindObjectOfType<AudioManager>().Play("Coin");
         }
     }
 

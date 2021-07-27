@@ -18,7 +18,7 @@ public class EnemyWithPistol : MonoBehaviour
     int index;
 
     bool entred = false;
-    private float gravityValue = -9.81f;
+
 
     private Animator animator;
     private CharacterController character;
@@ -63,6 +63,7 @@ public class EnemyWithPistol : MonoBehaviour
     public void attackPlayer()
     {
         animator.SetTrigger("isShooting");
+        FindObjectOfType<AudioManager>().Play("Gun");
         GameObject effect = Instantiate(particlesEffect, particlesEffectLocation.position, particlesEffectLocation.rotation);
         Destroy(effect, 0.4f);
 

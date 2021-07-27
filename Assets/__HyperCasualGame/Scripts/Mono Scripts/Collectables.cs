@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Collectables : MonoBehaviour
 {
+
+    // Key Collect Scripte
     [SerializeField] GameContrllerData GCD;
     [SerializeField] ParticleSystem portalEnd;
     private void Awake()
@@ -18,7 +20,8 @@ public class Collectables : MonoBehaviour
             gameObject.SetActive(false);
             GCD.hasTheKey = true;
             portalEnd.Play();
-            
+            FindObjectOfType<AudioManager>().Play("Key");
+
         }
     }
 }

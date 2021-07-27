@@ -20,6 +20,7 @@ public class UiMnager : MonoBehaviour
         {
             GCD.RestData();
         }
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
     }
 
     // Update is called once per frame
@@ -83,6 +84,7 @@ public class UiMnager : MonoBehaviour
     }
     public void CallLoseMenu()
     {
+        //FindObjectOfType<AudioManager>().Play("Lose");
         CallMenus(6);
     }
     public void BackToAnotherMenuButton(int index)
@@ -101,8 +103,9 @@ public class UiMnager : MonoBehaviour
     }
     public void CallNextLevel()
     {
+        int nextLevel = (SceneManager.GetActiveScene().buildIndex + 1) % levelCount;
         
-        SceneManager.LoadScene(((SceneManager.GetActiveScene().buildIndex + 1) % levelCount) +1);
+        SceneManager.LoadScene(nextLevel == 0 ? 1 :nextLevel );
     }
 
 }

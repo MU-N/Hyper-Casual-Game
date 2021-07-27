@@ -51,10 +51,10 @@ public class PlayerTouchController : MonoBehaviour
             else
                 verticalInput = 0f;
 
-            if(horizontalInput!=0 && verticalInput !=0)
+            if (horizontalInput != 0 && verticalInput != 0)
             {
-                horizontalInput /= 2.0f;
-                verticalInput /= 2.0f;
+                horizontalInput /= 1.95f;
+                verticalInput /= 1.95f;
             }
             input = new Vector3(horizontalInput, 0f, verticalInput);
             direction = input.x * cameraTransform.right + input.z * cameraTransform.forward;

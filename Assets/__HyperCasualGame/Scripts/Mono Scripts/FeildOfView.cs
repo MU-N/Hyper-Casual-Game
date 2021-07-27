@@ -102,8 +102,10 @@ public class FeildOfView : MonoBehaviour
                         EWP.attackPlayer();
                         //TODO: CALL GAME LOSE
                         GCD.isGameLose = true;
+                        
+
                     }
-                    
+
                 }
             }
         }

@@ -16,6 +16,7 @@ public class NextLvelCheck : MonoBehaviour
             // event to handel call next Mneu
             callWinMenu.Invoke();
             GCD.isGameWin = true;
+            FindObjectOfType<AudioManager>().Play("Next");
         }
     }
 
